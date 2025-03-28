@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Vector3 mousePos;
-    public GameObject camera;
-    private int speed = 3;
+    public GameObject mainCamera;
+    public int hordeSize = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        getMousePos();
         moveTowardMouse();
         moveCamera();
     }
@@ -35,6 +35,13 @@ public class Player : MonoBehaviour
     {
         float playerX = this.transform.position.x;
         float playerY = this.transform.position.y;
-        camera.transform.position = new Vector3(playerX, playerY, -10);
+        mainCamera.transform.position = new Vector3(playerX, playerY, -10);
+    }
+
+    private Vector3 getMousePos()
+    {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        return mousePos;
     }
 }
