@@ -27,7 +27,7 @@ public class EatingScript : MonoBehaviour
         float playerSize = playerCollider.bounds.size.magnitude;
         float objectSize = collision.bounds.size.magnitude;
         //eat object if player is larger
-        if (playerSize > objectSize)
+        if (playerSize > objectSize && collidedObject.tag != "Flock")
         {
             Debug.Log("ate");
             playerCollider.radius = playerCollider.radius + (float)0.25;
