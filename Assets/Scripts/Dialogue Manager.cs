@@ -10,17 +10,17 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueCanvas;
     public string[] dialogueLines;
     private int currentLine = 0;
-    private bool first = true;
+    public GameSaving saving;
+    private bool first = false;
     // Start is called before the first frame update
     void Start()
     {
-        if (dialogue != null && dialogueLines.Length != 0 && first == true)
+        if (dialogue != null && dialogueLines.Length != 0 && first == false)
         {
             dialogueCanvas.SetActive(true);
             Debug.Log("hi chat");
-            //dialogue.text = dialogueLines[0];
             StartCoroutine(dialogueCoroutine());
-            first = false;
+            first = true;
         }
         Debug.Log("tutorial not active");
     }

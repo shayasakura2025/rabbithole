@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EatingScript : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D playerCollider; 
-
+    [SerializeField] CircleCollider2D playerCollider;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -32,6 +32,7 @@ public class EatingScript : MonoBehaviour
             Debug.Log("ate");
             playerCollider.radius = playerCollider.radius + (float)0.25;
             Destroy(collision.gameObject);
+            player.addScore(objectSize);
         }
     }
 }
