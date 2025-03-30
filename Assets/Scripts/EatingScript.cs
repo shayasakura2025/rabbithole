@@ -9,11 +9,12 @@ public class EatingScript : MonoBehaviour
     [SerializeField] BoxCollider2D playerCollider; 
     public int destroyTreshold;
     public int currentBuns;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class EatingScript : MonoBehaviour
             if(currentBuns >= destroyTreshold)
             {
                 Destroy(this.gameObject.transform.parent.gameObject);
+                player.addScore(destroyTreshold);
             }
         }
     }
