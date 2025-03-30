@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Flock/Behavior/SteeredCohesion")]
 
-public class SteeredCohesionBehavior : FlockBehavior
+public class SteeredCohesionBehavior : FilteredFlockBehavior
 {
 
     Vector2 currentVelocity;
@@ -18,7 +18,8 @@ public class SteeredCohesionBehavior : FlockBehavior
             return Vector2.zero;
         }
         Vector2 cohesionMove = Vector2.zero;
-        foreach (Transform item in context) {
+        List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context); 
+        foreach (Transform item in filteredContext) {
             cohesionMove += (Vector2)item.position;
         }
         cohesionMove /= context.Count;
