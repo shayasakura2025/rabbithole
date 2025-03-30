@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EatingScript : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D playerCollider; 
+    [SerializeField] BoxCollider2D playerCollider; 
+    public int destroyTreshold;
+    public int currentBuns;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +28,28 @@ public class EatingScript : MonoBehaviour
 
         // Do something with the collided object (e.g., log its name)
         Debug.Log("Collided with: " + collidedObject.name);
-        float playerSize = playerCollider.bounds.size.magnitude;
-        float objectSize = collision.bounds.size.magnitude;
-        //eat object if player is larger
-        if (playerSize > objectSize && collidedObject.tag != "Flock")
+        if (collidedObject.tag == "Flock")
         {
-            Debug.Log("ate");
-            playerCollider.radius = playerCollider.radius + (float)0.25;
-            Destroy(collision.gameObject);
+            Debug.Log("in");
+            // playerCollider.radius = playerCollider.radius + (float)0.25;
+            currentBuns++;
+            if(currentBuns >= destroyTreshold)
+            {
+                Destroy(this.gameObject.transform.parent.gameObject);
+            }
         }
     }
+
+    // void OnTriggerExit2D(Collider2D collision)
+    // {
+    //     GameObject collidedObject = collision.gameObject;
+    //     Debug.Log("Exited by: " + collidedObject.name);
+    //     if (collidedObject.tag == "Flock")
+    //     {
+    //         Debug.Log("out");
+    //         // playerCollider.radius = playerCollider.radius + (float)0.25;
+    //         currentBuns--;
+    //     }
+
+    // }
 }
