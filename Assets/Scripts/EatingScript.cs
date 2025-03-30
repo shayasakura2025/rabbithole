@@ -12,11 +12,14 @@ public class EatingScript : MonoBehaviour
     public Player player;
     
     [SerializeField] Flock flock;
+    public ParticleManager particleManager;
 
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
+        flock = FindObjectOfType<Flock>();
+        particleManager = FindObjectOfType<ParticleManager>();
     }
 
     // Update is called once per frame
@@ -35,12 +38,17 @@ public class EatingScript : MonoBehaviour
         {
             Debug.Log("in");
             // playerCollider.radius = playerCollider.radius + (float)0.25;
+            particleManager.playEating(this.gameObject.transform.position);
             currentBuns++;
             if(currentBuns >= destroyTreshold)
             {
+                particleManager.playEaten(this.gameObject.transform.position);
                 Destroy(this.gameObject.transform.parent.gameObject);
                 player.addScore(destroyTreshold);
                 flock.GetComponent<Flock>().AddBunny();
+            }
+            else{
+                particleManager.playCantEat(this.gameObject.transform.position);
             }
         }
     }
