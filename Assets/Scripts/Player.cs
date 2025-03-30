@@ -15,10 +15,10 @@ public class Player : MonoBehaviour
     public TMP_Text scoreText;
     public int timer = 5;
     public TMP_Text timerText;
-    private double leftBound = -30;
-    private double rightBound = 30;
-    private double upperBound = 16.875;
-    private double lowerBound = -16.875;
+    private double leftBound = -40.4;
+    private double rightBound = 40.4;
+    private double upperBound = 22.75;
+    private double lowerBound = -22.75;
     public GameSaving saving;
     // Start is called before the first frame update
     void Start()
