@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         Vector3 velocity = Vector2.zero;
         if (transform.position != mousePos)
         {
+
             Vector3 newPos = Vector3.SmoothDamp(transform.position, mousePos, ref velocity, 0.1f, 20);
             transform.position = newPos;
         }
@@ -44,4 +45,5 @@ public class Player : MonoBehaviour
         mousePos.z = 0;
         return mousePos;
     }
+
 }
