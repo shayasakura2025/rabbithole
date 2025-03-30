@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip bunnySpawn;
     public AudioClip jumpSound;
     public AudioClip eatSound;
+    public AudioClip winSound;
 
     new AudioSource[] audio;
 
@@ -33,5 +34,11 @@ public class SoundManager : MonoBehaviour
     {
         audio[1].clip = eatSound;
         audio[1].Play();
+    }
+
+    public void playWinSound() 
+    {
+        audio[2].clip = winSound;
+        audio[2].Play();
     }
 }
