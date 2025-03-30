@@ -85,5 +85,9 @@ public class Flock : MonoBehaviour
             newAgent.name = "Agent " + bunCount;
             newAgent.Initialize(this);
             agents.Add(newAgent);
+            if (bunCount < 4)
+            {
+                newAgent.GetComponentInChildren<FlockAnimatedSound>().canJump = true;
+            }
     }
 }

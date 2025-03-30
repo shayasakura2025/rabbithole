@@ -26,11 +26,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Flock flock;
     [SerializeField] private Flock flockAnimated;
     private int totalFlock;
+
+    public SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        soundManager = FindObjectOfType<SoundManager>();
         StartCoroutine(timerCoroutine());
         mainCamera.fieldOfView = 60f;
     }
@@ -172,5 +175,10 @@ public class Player : MonoBehaviour
         if (mainCamera.orthographicSize <= 4.5)
         mainCamera.orthographicSize = totalFlock * 0.03f + 3f;
 
+    }
+
+    public void playJumpSound()
+    {
+        soundManager.playJumpSound();
     }
 }

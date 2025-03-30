@@ -93,7 +93,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887630681469372725}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a0cf1cb46b1382a4094f5830474d4435, type: 2}
   m_CullingMode: 0
@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 1014057340290357851}
   - component: {fileID: 5360639308703826029}
   - component: {fileID: 5250979198613084262}
+  - component: {fileID: 7105496955313449198}
   m_Layer: 0
   m_Name: FlockAgentSprite
   m_TagString: Untagged
@@ -239,6 +240,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7105496955313449198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3470816588383091799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc1e4dbcbd87b8409f0cbccd66198b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
 --- !u!1 &5525791229312486774
 GameObject:
   m_ObjectHideFlags: 0

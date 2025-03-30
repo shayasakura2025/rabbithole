@@ -13,6 +13,7 @@ public class EatingScript : MonoBehaviour
     
     public Flock[] flock;
     public ParticleManager particleManager;
+    public SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class EatingScript : MonoBehaviour
         player = FindObjectOfType<Player>();
         flock = FindObjectsOfType<Flock>();
         particleManager = FindObjectOfType<ParticleManager>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class EatingScript : MonoBehaviour
             currentBuns++;
             if(currentBuns >= destroyTreshold)
             {
+                soundManager.playEatSound();
                 particleManager.playEaten(this.gameObject.transform.position);
                 Destroy(this.gameObject.transform.parent.gameObject);
                 player.addScore(destroyTreshold);
@@ -69,13 +72,7 @@ public class EatingScript : MonoBehaviour
     void addBunnyBalanceFlock()
     {
         //grabs animated flock second
-        if (flock[1].bunCount <= flock[0].bunCount + 5)
-        {
-            flock[1].AddBunny();
-        }
-        else
-        {
-            flock[0].AddBunny();
-        }
+        soundManager.playSpawnSound();
+        flock[1].AddBunny();
     }
 }
