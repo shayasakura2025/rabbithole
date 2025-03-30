@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueCanvas.SetActive(true);
             Debug.Log("hi chat");
-            dialogue.text = dialogueLines[0];
+            //dialogue.text = dialogueLines[0];
             StartCoroutine(dialogueCoroutine());
             first = false;
         }
@@ -35,9 +35,9 @@ public class DialogueManager : MonoBehaviour
     {
         while (currentLine < dialogueLines.Length)
         {
-            yield return new WaitForSeconds(2);
-            currentLine++;
             dialogue.text = dialogueLines[currentLine];
+            currentLine++;
+            yield return new WaitForSeconds(2);
         }
         yield return new WaitForSeconds(3);
         dialogueCanvas.SetActive(false);
