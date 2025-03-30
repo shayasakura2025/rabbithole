@@ -120,7 +120,10 @@ public class Player : MonoBehaviour
         }
         transform.localScale = currentScale;
 
-        Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        //commenting this out stops player from rotating
+        //  seems to rotate the player, unsure if needed
+
+        /**Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         transform.up = direction;
         if (transform.position.x <= mousePos.x)
         {
@@ -129,7 +132,7 @@ public class Player : MonoBehaviour
         else
         {
             transform.Rotate(0, 0, -90);
-        }
+        }**/
     }
 
     public void addScore(float add)
