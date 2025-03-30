@@ -236,8 +236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 4377951145481518241}
-  destroyTreshold: 3
+  destroyTreshold: 2
   currentBuns: 0
   player: {fileID: 0}
-  flock: {fileID: 0}
+  flock:
+  - {fileID: 0}
   particleManager: {fileID: 0}

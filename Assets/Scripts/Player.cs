@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private Vector3 mousePos;
-    public GameObject mainCamera;
+    public Camera mainCamera;
     public int hordeSize = 1;
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
@@ -20,12 +20,19 @@ public class Player : MonoBehaviour
     private double upperBound = 22.75;
     private double lowerBound = -22.75;
     public GameSaving saving;
+    public float cameraZoom;
+    public float minFov;
+    public float maxFov;
+    [SerializeField] private Flock flock;
+    [SerializeField] private Flock flockAnimated;
+    private int totalFlock;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(timerCoroutine());
+        mainCamera.fieldOfView = 60f;
     }
 
     // Update is called once per frame
@@ -34,7 +41,8 @@ public class Player : MonoBehaviour
         getMousePos();
         moveTowardMouse();
         moveCamera();
-
+        totalFlock = flock.bunCount + flockAnimated.bunCount;
+        zoomCamera();
 
     }
 
@@ -156,5 +164,13 @@ public class Player : MonoBehaviour
         saving.SaveData();
         UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
         
+    }
+
+    public void zoomCamera()
+    {
+        Debug.Log("total flock: " + totalFlock);
+        if (mainCamera.orthographicSize <= 4.5)
+        mainCamera.orthographicSize = totalFlock * 0.03f + 3f;
+
     }
 }

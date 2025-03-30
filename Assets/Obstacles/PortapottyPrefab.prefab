@@ -207,7 +207,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -236,8 +236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 4377951145481518241}
-  destroyTreshold: 20
+  destroyTreshold: 10
   currentBuns: 0
   player: {fileID: 0}
-  flock: {fileID: 0}
+  flock:
+  - {fileID: 0}
   particleManager: {fileID: 0}
