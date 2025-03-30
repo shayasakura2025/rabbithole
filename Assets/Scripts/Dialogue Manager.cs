@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
             dialogueCanvas.SetActive(true);
             Debug.Log("hi chat");
             dialogue.text = dialogueLines[0];
-            StartCoroutine(dialogueCoroutine());
+            // StartCoroutine(dialogueCoroutine());
             first = false;
         }
         Debug.Log("tutorial not active");
