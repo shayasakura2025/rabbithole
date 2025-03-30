@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 using TMPro;
 
 public class GameSaving : MonoBehaviour
 {
-    private string path = "";
     private GameData gameData;
     public TMP_Text score;
     public TMP_Text highScore;
@@ -14,7 +12,6 @@ public class GameSaving : MonoBehaviour
     void Start()
     {
         setData();
-        SetPaths();
         LoadData();
         if (score != null)
         {
@@ -29,10 +26,6 @@ public class GameSaving : MonoBehaviour
         
     }
 
-    private void SetPaths()
-    {
-        path = Application.dataPath + Path.AltDirectorySeparatorChar + "GameData.json";
-    }
 
     private void setData()
     {
@@ -66,25 +59,25 @@ public class GameSaving : MonoBehaviour
 
     public void SaveData()
     {
-        string savePath = path;
-
-        Debug.Log("Saving Data at " + savePath);
-        string settings = JsonUtility.ToJson(gameData);
-        Debug.Log(settings);
-
-
-        using StreamWriter writer = new StreamWriter(savePath);
-        writer.Write(settings);
+        string jsonData = JsonUtility.ToJson(gameData);
+        PlayerPrefs.SetString("GameData", jsonData);
+        PlayerPrefs.Save(); // Make sure the data is written immediately
+        Debug.Log("Data saved: " + jsonData);
     }
 
     public void LoadData()
     {
-        using StreamReader reader = new StreamReader(path);
-        string json = reader.ReadToEnd();
-
-        GameData data = JsonUtility.FromJson<GameData>(json);
-        Debug.Log(data.ToString());
-        gameData = data;
+        if (PlayerPrefs.HasKey("GameData"))
+        {
+            string json = PlayerPrefs.GetString("GameData");
+            gameData = JsonUtility.FromJson<GameData>(json);
+            Debug.Log("Data loaded: " + json);
+        }
+        else
+        {
+            gameData = new GameData(0, 0, false);
+            Debug.Log("No saved data found. Using defaults.");
+        }
 
     }
 }

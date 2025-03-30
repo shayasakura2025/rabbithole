@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
         saving.setScore((int)(score));
         saving.setHighestScore((int)(score));
         saving.SaveData();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene("EndScene");
         
     }
 
