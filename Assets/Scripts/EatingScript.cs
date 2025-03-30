@@ -11,14 +11,14 @@ public class EatingScript : MonoBehaviour
     public int currentBuns;
     public Player player;
     
-    [SerializeField] Flock flock;
+    public Flock[] flock;
     public ParticleManager particleManager;
 
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
-        flock = FindObjectOfType<Flock>();
+        flock = FindObjectsOfType<Flock>();
         particleManager = FindObjectOfType<ParticleManager>();
     }
 
@@ -45,7 +45,8 @@ public class EatingScript : MonoBehaviour
                 particleManager.playEaten(this.gameObject.transform.position);
                 Destroy(this.gameObject.transform.parent.gameObject);
                 player.addScore(destroyTreshold);
-                flock.GetComponent<Flock>().AddBunny();
+                addBunnyBalanceFlock();
+                //flock.GetComponent<Flock>().AddBunny();
             }
             else{
                 particleManager.playCantEat(this.gameObject.transform.position);
@@ -62,6 +63,19 @@ public class EatingScript : MonoBehaviour
             Debug.Log("out");
             // playerCollider.radius = playerCollider.radius + (float)0.25;
             currentBuns--;
+        }
+    }
+
+    void addBunnyBalanceFlock()
+    {
+        //grabs animated flock second
+        if (flock[1].bunCount <= flock[0].bunCount + 5)
+        {
+            flock[1].AddBunny();
+        }
+        else
+        {
+            flock[0].AddBunny();
         }
     }
 }

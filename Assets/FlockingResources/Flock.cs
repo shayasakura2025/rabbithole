@@ -72,6 +72,7 @@ public class Flock : MonoBehaviour
 
     public void AddBunny() {
         InstantiateNewBun(bunCount);
+        bunCount++;
     }
 
     void InstantiateNewBun(int bunCount) {
