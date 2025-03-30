@@ -13,6 +13,8 @@ public class FlockAgent : MonoBehaviour
     Collider2D agentCollider;
     public Collider2D AgentCollider {get {return agentCollider;}}
 
+    [SerializeField] GameObject spriteChild;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,22 @@ public class FlockAgent : MonoBehaviour
         
         transform.up = velocity;
         transform.position += (Vector3)velocity * Time.deltaTime;
+        Vector3 currentRotation = transform.eulerAngles;
+
+        if(spriteChild)
+        {
+            spriteChild.transform.eulerAngles = new Vector3(currentRotation.x, currentRotation.y, 0);
+
+            Vector3 currentScale = spriteChild.transform.localScale;
+            if(transform.position.x < velocity.x)
+            {
+                currentScale.x = -1;
+            } else
+            {
+                currentScale.x = 1;
+            }
+            spriteChild.transform.localScale = currentScale;
+        }
 
     }
 }

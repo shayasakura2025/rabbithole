@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35846f1dd180fd844859b429644c4d8b, type: 3}
-  m_Name: StayInRadius
+  m_Name: NewStay In Radius Behavior
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0}
-  radius: 0.3
+  radius: 3.5

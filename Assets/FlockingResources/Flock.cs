@@ -8,8 +8,8 @@ public class Flock : MonoBehaviour
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehavior behavior;
 
-    [Range(10,500)]
-    public int startingCount = 250;
+    [Range(1,50)]
+    public int startingCount = 1;
     const float AgentDensity = 0.08f;
 
     [Range(1f, 100f)]
@@ -28,6 +28,7 @@ public class Flock : MonoBehaviour
     public float SquareAvoidanceRadius {get {return squareAvoidanceRadius;}}
 
     [SerializeField] public GameObject playerRef;
+    public int bunCount = 1;
     
     // Start is called before the first frame update
     void Start()
@@ -37,15 +38,8 @@ public class Flock : MonoBehaviour
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
 
         for (int i = 0; i < startingCount; i++){
-            FlockAgent newAgent = Instantiate(
-                agentPrefab,
-                UnityEngine.Random.insideUnitCircle * startingCount * AgentDensity,
-                Quaternion.Euler(Vector3.forward * UnityEngine.Random.Range(0f,360f)),
-                transform
-            );
-            newAgent.name = "Agent " + i;
-            newAgent.Initialize(this);
-            agents.Add(newAgent);
+            bunCount += 1;
+            InstantiateNewBun(bunCount);
         }
     }
 
@@ -74,5 +68,21 @@ public class Flock : MonoBehaviour
         }
 
         return context;
+    }
+
+    public void AddBunny() {
+        InstantiateNewBun(bunCount);
+    }
+
+    void InstantiateNewBun(int bunCount) {
+        FlockAgent newAgent = Instantiate(
+                agentPrefab,
+                UnityEngine.Random.insideUnitCircle * startingCount * AgentDensity,
+                Quaternion.Euler(Vector3.forward * UnityEngine.Random.Range(0f,360f)),
+                transform
+            );
+            newAgent.name = "Agent " + bunCount;
+            newAgent.Initialize(this);
+            agents.Add(newAgent);
     }
 }

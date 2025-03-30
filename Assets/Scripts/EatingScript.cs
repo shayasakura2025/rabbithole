@@ -9,6 +9,8 @@ public class EatingScript : MonoBehaviour
     [SerializeField] BoxCollider2D playerCollider; 
     public int destroyTreshold;
     public int currentBuns;
+    
+    [SerializeField] Flock flock;
 
     // Start is called before the first frame update
     void Start()
@@ -36,20 +38,20 @@ public class EatingScript : MonoBehaviour
             if(currentBuns >= destroyTreshold)
             {
                 Destroy(this.gameObject.transform.parent.gameObject);
+                flock.GetComponent<Flock>().AddBunny();
             }
         }
     }
 
-    // void OnTriggerExit2D(Collider2D collision)
-    // {
-    //     GameObject collidedObject = collision.gameObject;
-    //     Debug.Log("Exited by: " + collidedObject.name);
-    //     if (collidedObject.tag == "Flock")
-    //     {
-    //         Debug.Log("out");
-    //         // playerCollider.radius = playerCollider.radius + (float)0.25;
-    //         currentBuns--;
-    //     }
-
-    // }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        GameObject collidedObject = collision.gameObject;
+        Debug.Log("Exited by: " + collidedObject.name);
+        if (collidedObject.tag == "Flock")
+        {
+            Debug.Log("out");
+            // playerCollider.radius = playerCollider.radius + (float)0.25;
+            currentBuns--;
+        }
+    }
 }

@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         if (transform.position != mousePos)
         {
 
-            Vector3 newPos = Vector3.SmoothDamp(transform.position, mousePos, ref velocity, 0.1f, 20);
+            Vector3 newPos = Vector3.SmoothDamp(transform.position, mousePos, ref velocity, 0.15f, 20);
             transform.position = newPos;
             flipSprite();
         }
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         }
         transform.localScale = currentScale;
 
-        Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        /**Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         transform.up = direction;
         if (transform.position.x <= mousePos.x)
         {
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
         else
         {
             transform.Rotate(0, 0, -90);
-        }
+        }**/
     }
 
     public void addScore(float add)
