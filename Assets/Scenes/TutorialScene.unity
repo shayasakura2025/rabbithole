@@ -333,6 +333,7 @@ MonoBehaviour:
   neighborRadius: 1.5
   avoidanceRadiusMultiplier: 0.5
   playerRef: {fileID: 527387027}
+  bunCount: 1
 --- !u!212 &175559823
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -613,6 +614,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420028}
   hordeSize: 1
+  score: 0
+  scoreText: {fileID: 0}
+  timer: 5
+  timerText: {fileID: 0}
+  saving: {fileID: 0}
+  cameraZoom: 0
+  minFov: 0
+  maxFov: 0
+  flock: {fileID: 0}
+  flockAnimated: {fileID: 0}
+  soundManager: {fileID: 0}
 --- !u!212 &527387029
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1128,6 +1140,7 @@ MonoBehaviour:
   - You can eat objects to grow your flock
   - Eat as much as possible during the time limit
   - Eat more for a higher score!
+  saving: {fileID: 0}
 --- !u!114 &1453194055
 MonoBehaviour:
   m_ObjectHideFlags: 0
