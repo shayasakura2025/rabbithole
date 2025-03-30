@@ -26,6 +26,8 @@ public class Flock : MonoBehaviour
     float squareNeighborRadius;
     float squareAvoidanceRadius;
     public float SquareAvoidanceRadius {get {return squareAvoidanceRadius;}}
+
+    [SerializeField] public GameObject playerRef;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class Flock : MonoBehaviour
                 transform
             );
             newAgent.name = "Agent " + i;
+            newAgent.Initialize(this);
             agents.Add(newAgent);
         }
     }
