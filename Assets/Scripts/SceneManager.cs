@@ -19,6 +19,7 @@ public class SceneManagemetn : MonoBehaviour
 
     public void loadScene(string scene)
     {
+        Debug.Log("Loading scene: " + scene);
         UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 }

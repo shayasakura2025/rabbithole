@@ -47,6 +47,10 @@ public class Player : MonoBehaviour
         totalFlock = flock.bunCount + flockAnimated.bunCount;
         zoomCamera();
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            timer = 0;
+        }
     }
 
     private void moveTowardMouse()
