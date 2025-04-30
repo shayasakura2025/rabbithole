@@ -8,13 +8,15 @@ public class GameData
     public int highestScore;
     public int[] leaderboardList = new int[10];
     public bool tutorial;
+    public bool restarted;
     // Start is called before the first frame update
-    public GameData(int currentScore, int highestScore, bool tutorial)
+    public GameData(int currentScore, int highestScore, bool tutorial, bool restarted)
     {
         this.currentScore = currentScore;
         this.highestScore = highestScore;
         resetLeaderboard();
         this.tutorial = tutorial;
+        this.restarted = restarted;
     }
 
     void Start()

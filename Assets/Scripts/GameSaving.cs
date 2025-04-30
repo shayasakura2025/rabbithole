@@ -15,6 +15,7 @@ public class GameSaving : MonoBehaviour
     {
         
         setData();
+        //SaveData();
         LoadData();
         foreach (var x in gameData.leaderboardList)
         {
@@ -24,7 +25,12 @@ public class GameSaving : MonoBehaviour
         {
             score.text = gameData.currentScore.ToString();
             highScore.text = gameData.highestScore.ToString();
-            changeLeaderboard(gameData.currentScore);
+            if (gameData.restarted == true)
+            {
+                gameData.restarted = false;
+                changeLeaderboard(gameData.currentScore);
+            }
+            
         }
         if (leaderboard[0] != null)
         {
@@ -43,7 +49,7 @@ public class GameSaving : MonoBehaviour
     {
         if (gameData == null)
         {
-            gameData = new GameData(0, 0, false);
+            gameData = new GameData(0, 0, false, true);
             Debug.Log("default settings enabled");
         }
 
@@ -106,9 +112,15 @@ public class GameSaving : MonoBehaviour
         }
         else
         {
-            gameData = new GameData(0, 0, false);
+            gameData = new GameData(0, 0, false, true);
             Debug.Log("No saved data found. Using defaults.");
         }
 
+    }
+
+    public void restartGame()
+    {
+        gameData.restarted = true;
+        SaveData();
     }
 }
