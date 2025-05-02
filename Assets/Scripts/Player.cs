@@ -47,6 +47,10 @@ public class Player : MonoBehaviour
         totalFlock = flock.bunCount + flockAnimated.bunCount;
         zoomCamera();
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            timer = 0;
+        }
     }
 
     private void moveTowardMouse()
@@ -163,7 +167,6 @@ public class Player : MonoBehaviour
             timerText.text = ("Timer: " + timer);
         }
         saving.setScore((int)(score));
-        saving.setHighestScore((int)(score));
         saving.SaveData();
         SceneManager.LoadScene("EndScene");
         
