@@ -11,11 +11,12 @@ public class Dissolve : MonoBehaviour
     [SerializeField] private float dissolveTime = 0.75f;
     private SpriteRenderer _spriteRenderer;
     private Material _material;
-    [SerializeField] private int _disolveAmount = Shader.PropertyToID("_DissolveAmount");
+    [SerializeField] private int _dissolveAmount = Shader.PropertyToID("_DissolveAmount");
 
 //not lerping figure out why later
     private void Start()
     {
+        _dissolveAmount = Shader.PropertyToID("_DissolveAmount");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _material = new Material(_spriteRenderer.material);
     }
@@ -34,6 +35,7 @@ public class Dissolve : MonoBehaviour
 
     public IEnumerator EatItem (bool useDissolve)
     {
+        Debug.Log("In Eat");
         float elapsedTime = 0f;
         while (elapsedTime < dissolveTime)
         {
@@ -41,7 +43,7 @@ public class Dissolve : MonoBehaviour
 
             float lerpedDissolve = Mathf.Lerp(0, 1.1f, (elapsedTime/dissolveTime));
             if (useDissolve)
-                _material.SetFloat(_disolveAmount, lerpedDissolve);
+                _material.SetFloat(_dissolveAmount, lerpedDissolve);
             
             yield return null;
         }
@@ -49,6 +51,7 @@ public class Dissolve : MonoBehaviour
 
     public IEnumerator unEat (bool useDissolve)
     {
+        Debug.Log("Not Eat");
         float elapsedTime = 0f;
         while (elapsedTime < dissolveTime)
         {
@@ -56,7 +59,7 @@ public class Dissolve : MonoBehaviour
 
             float lerpedDissolve = Mathf.Lerp(1.1f, 0f, (elapsedTime/dissolveTime));
             if (useDissolve)
-                _material.SetFloat(_disolveAmount, lerpedDissolve);
+                _material.SetFloat(_dissolveAmount, lerpedDissolve);
             
             yield return null;
         }
