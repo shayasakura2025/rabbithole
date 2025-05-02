@@ -167,7 +167,6 @@ public class Player : MonoBehaviour
             timerText.text = ("Timer: " + timer);
         }
         saving.setScore((int)(score));
-        saving.setHighestScore((int)(score));
         saving.SaveData();
         SceneManager.LoadScene("EndScene");
         

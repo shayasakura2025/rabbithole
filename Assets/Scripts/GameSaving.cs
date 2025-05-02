@@ -6,16 +6,18 @@ using TMPro;
 public class GameSaving : MonoBehaviour
 {
     private GameData gameData;
-    public TMP_Text score;
-    public TMP_Text highScore;
-    public TMP_Text[] leaderboard = new TMP_Text[10];
+    private string currentName;
+    [SerializeField] private TMP_Text score;
+    [SerializeField] private TMP_Text[] leaderboard = new TMP_Text[10];
+    [SerializeField] private TMP_Text[] leaderboardNames = new TMP_Text[10];
 
     // Start is called before the first frame update
     void Start()
     {
         
         setData();
-        //SaveData();
+        // Uncomment resetData function to reset game data
+        resetData();
         LoadData();
         foreach (var x in gameData.leaderboardList)
         {
@@ -24,12 +26,6 @@ public class GameSaving : MonoBehaviour
         if (score != null)
         {
             score.text = gameData.currentScore.ToString();
-            highScore.text = gameData.highestScore.ToString();
-            if (gameData.restarted == true)
-            {
-                gameData.restarted = false;
-                changeLeaderboard(gameData.currentScore);
-            }
             
         }
         if (leaderboard[0] != null)
@@ -49,10 +45,16 @@ public class GameSaving : MonoBehaviour
     {
         if (gameData == null)
         {
-            gameData = new GameData(0, 0, false, true);
+            gameData = new GameData(0, false, true);
             Debug.Log("default settings enabled");
         }
 
+    }
+
+    public void changeLeaderboard()
+    {
+        gameData.changeLeaderboard(gameData.currentScore, currentName);
+        SaveData();
     }
 
     public void setScore(int score)
@@ -60,20 +62,14 @@ public class GameSaving : MonoBehaviour
         gameData.setCurrentScore(score);
     }
 
-    public void setHighestScore(int highest)
-    {
-        gameData.setHighestScore(highest);
-    }
-
-    public void changeLeaderboard(int score)
-    {
-        gameData.changeLeaderboard(score);
-        SaveData();
-    }
-
     public int getLeaderboard(int i)
     {
         return gameData.getLeaderboard(i);
+    }
+
+    public string getName(int i)
+    {
+        return gameData.getName(i);
     }
 
     public void printLeaderboard()
@@ -81,6 +77,7 @@ public class GameSaving : MonoBehaviour
         for (int i = 0; i < leaderboard.Length; i++)
         {
             leaderboard[i].text = getLeaderboard(i).ToString();
+            leaderboardNames[i].text = getName(i);
         }
     }
 
@@ -112,7 +109,7 @@ public class GameSaving : MonoBehaviour
         }
         else
         {
-            gameData = new GameData(0, 0, false, true);
+            gameData = new GameData(0, false, true);
             Debug.Log("No saved data found. Using defaults.");
         }
 
@@ -121,6 +118,17 @@ public class GameSaving : MonoBehaviour
     public void restartGame()
     {
         gameData.restarted = true;
+        SaveData();
+    }
+
+    public void changeName(string name)
+    {
+        currentName = name;
+    }
+
+    public void resetData()
+    {
+        gameData = new GameData(0, false, true);
         SaveData();
     }
 }

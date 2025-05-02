@@ -5,15 +5,14 @@ using UnityEngine;
 public class GameData
 {
     public int currentScore;
-    public int highestScore;
     public int[] leaderboardList = new int[10];
+    public string[] namesList = new string[10];
     public bool tutorial;
     public bool restarted;
     // Start is called before the first frame update
-    public GameData(int currentScore, int highestScore, bool tutorial, bool restarted)
+    public GameData(int currentScore, bool tutorial, bool restarted)
     {
         this.currentScore = currentScore;
-        this.highestScore = highestScore;
         resetLeaderboard();
         this.tutorial = tutorial;
         this.restarted = restarted;
@@ -40,47 +39,52 @@ public class GameData
         tutorial = state;
     }
 
-    public void setHighestScore(int highest)
-    {
-        if (highest > highestScore)
-        {
-            highestScore = highest;
-        }
-    }
-
-    public void changeLeaderboard(int score)
+    public void changeLeaderboard(int score, string name)
     {
         if (score <= leaderboardList[9])
         {
             Debug.Log("No change to leaderboard");
         }
-        else
+        else if (restarted == true)
         {
             Debug.Log("Changing leaderboard");
             bool replaced = false;
             int prevScore = 0;
             int thisScore = 0;
+            string prevName = "";
+            string thisName = "";
             for (int i = 0; i < leaderboardList.Length; i++)
             {
                 if (score > leaderboardList[i] && replaced == false)
                 {
                     thisScore = leaderboardList[i];
+                    thisName = namesList[i];
                     leaderboardList[i] = score;
+                    namesList[i] = name;
                     replaced = true;
                 }
                 else if (replaced == true)
                 {
                     prevScore = thisScore;
                     thisScore = leaderboardList[i];
+                    prevName = thisName;
+                    thisName = namesList[i];
                     leaderboardList[i] = prevScore;
+                    namesList[i] = prevName;
                 }
             }
+            restarted = false;
         }
     }
 
     public int getLeaderboard(int i)
     {
         return leaderboardList[i];
+    }
+
+    public string getName(int i)
+    {
+        return namesList[i];
     }
 
     public string printLeaderboard(int i)
@@ -93,6 +97,7 @@ public class GameData
         for (int i = 0; i < leaderboardList.Length; i++)
         {
             leaderboardList[i] = 0;
+            namesList[i] = "";
         }
     }
 }
