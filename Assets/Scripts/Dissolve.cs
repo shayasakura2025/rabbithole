@@ -8,33 +8,37 @@ using UnityEngine.UIElements;
 
 public class Dissolve : MonoBehaviour
 {
-    [SerializeField] private float dissolveTime = 0.75f;
+    [SerializeField] private float dissolveTime = 0.5f;
     private SpriteRenderer[] _spriteRenderers;
     private Material[] _materials;
-    [SerializeField] private int _dissolveAmount = Shader.PropertyToID("_DissolveAmount");
+    //now set to urmom, the actual id doesnt work??
+    private int _dissolveAmount = Shader.PropertyToID("_urmom");
+    private int _mainTex = Shader.PropertyToID("_mainTex");
+    [SerializeField] private float newDissolveAmount;
+    [SerializeField] private float oldDissovleAmount;
+
 
 //not lerping figure out why later
     private void Start()
     {
-        _dissolveAmount = Shader.PropertyToID("_DissolveAmount");
         _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         _materials = new Material[_spriteRenderers.Length];
         for (int i = 0; i < _spriteRenderers.Length; i++)
         {
             _materials[i] = _spriteRenderers[i].material;
+
+            Texture2D spriteTexture = _spriteRenderers[i].sprite.texture;
+            _materials[i].SetTexture("_mainTex", spriteTexture);
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartCoroutine(EatItem(true));
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(unEat(true));
-        }
+        oldDissovleAmount = newDissolveAmount;
+        int currentBuns = GetComponentInChildren<EatingScript>().currentBuns;
+        int destroyTreshold = GetComponentInChildren<EatingScript>().destroyTreshold;
+        newDissolveAmount = (float)currentBuns/(float)destroyTreshold;
+        StartCoroutine(EatItem(true));
     }
 
     public IEnumerator EatItem (bool useDissolve)
@@ -45,9 +49,17 @@ public class Dissolve : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            float lerpedDissolve = Mathf.Lerp(0, 1.1f, (elapsedTime/dissolveTime));
-            if (useDissolve)
-                //_material.SetFloat(_dissolveAmount, lerpedDissolve);
+            //float lerpedDissolve = Mathf.Lerp(0, 1.1f, (elapsedTime/dissolveTime));
+            float lerpedDissolve = Mathf.Lerp(oldDissovleAmount, newDissolveAmount, (elapsedTime/dissolveTime));
+
+            for (int i = 0; i < _materials.Length; i++)
+            {
+                if (useDissolve)
+                {
+                    _materials[i].SetFloat(_dissolveAmount, lerpedDissolve);
+                }
+            }
+            
             
             yield return null;
         }
@@ -61,9 +73,16 @@ public class Dissolve : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            float lerpedDissolve = Mathf.Lerp(1.1f, 0f, (elapsedTime/dissolveTime));
-            if (useDissolve)
-                //_material.SetFloat(_dissolveAmount, lerpedDissolve);
+            //float lerpedDissolve = Mathf.Lerp(1.1f, 0f, (elapsedTime/dissolveTime));
+            float lerpedDissolve = Mathf.Lerp(newDissolveAmount, 0f, (elapsedTime/dissolveTime));
+
+            for (int i = 0; i < _materials.Length; i++)
+            {
+                if (useDissolve)
+                {
+                    _materials[i].SetFloat(_dissolveAmount, lerpedDissolve);
+                }
+            }
             
             yield return null;
         }

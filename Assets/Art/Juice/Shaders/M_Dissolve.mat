@@ -43,8 +43,9 @@ Material:
     m_Floats:
     - _DissolveAmount: 0
     - _DissolveScale: 0
+    - _urmom: 0
     m_Colors:
-    - _DissolveColor: {r: 1, g: 0, b: 0.020421028, a: 1}
+    - _DissolveColor: {r: 0.98225087, g: 0.44520125, b: 0.5028866, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5595520889746102695
 MonoBehaviour:
