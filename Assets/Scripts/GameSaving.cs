@@ -17,7 +17,7 @@ public class GameSaving : MonoBehaviour
         
         setData();
         // Uncomment resetData function to reset game data
-        resetData();
+        //resetData();
         LoadData();
         foreach (var x in gameData.leaderboardList)
         {
