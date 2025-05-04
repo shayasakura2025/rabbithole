@@ -9,13 +9,15 @@ public class GameData
     public string[] namesList = new string[10];
     public bool tutorial;
     public bool restarted;
+    public int mode;
     // Start is called before the first frame update
-    public GameData(int currentScore, bool tutorial, bool restarted)
+    public GameData(int currentScore, bool tutorial, bool restarted, int mode)
     {
         this.currentScore = currentScore;
         resetLeaderboard();
         this.tutorial = tutorial;
         this.restarted = restarted;
+        this.mode = mode;
     }
 
     void Start()
@@ -85,6 +87,16 @@ public class GameData
     public string getName(int i)
     {
         return namesList[i];
+    }
+
+    public int getMode()
+    {
+        return mode;
+    }
+
+    public void setMode(int mode)
+    {
+        this.mode = mode;
     }
 
     public string printLeaderboard(int i)

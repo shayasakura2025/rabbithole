@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public AudioClip buttonSound;
     [SerializeField] GameObject creditsPage;
+    [SerializeField] GameObject modeSelect;
     new AudioSource audio;
     public void PlayGame() {
         audio = GetComponent<AudioSource>();
@@ -37,6 +38,22 @@ public class MainMenu : MonoBehaviour
         audio.clip = buttonSound;
         audio.Play();
         creditsPage.SetActive(false);
+    }
+
+    public void enableModeSelect()
+    {
+        audio = GetComponent<AudioSource>();
+        audio.clip = buttonSound;
+        audio.Play();
+        modeSelect.SetActive(true);
+    }
+
+    public void hideModeSelect()
+    {
+        audio = GetComponent<AudioSource>();
+        audio.clip = buttonSound;
+        audio.Play();
+        modeSelect.SetActive(false);
     }
 
     public IEnumerator waitForSound()

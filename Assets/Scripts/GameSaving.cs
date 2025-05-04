@@ -45,7 +45,7 @@ public class GameSaving : MonoBehaviour
     {
         if (gameData == null)
         {
-            gameData = new GameData(0, false, true);
+            gameData = new GameData(0, false, true, 0);
             Debug.Log("default settings enabled");
         }
 
@@ -91,11 +91,23 @@ public class GameSaving : MonoBehaviour
         return gameData.tutorial;
     }
 
+    public int getMode()
+    {
+        return gameData.getMode();
+    }
+
+    public void setMode(int mode)
+    {
+        gameData.setMode(mode);
+        Debug.Log("changing mode to " + gameData.getMode());
+        SaveData();
+    }
+
     public void SaveData()
     {
         string jsonData = JsonUtility.ToJson(gameData);
         PlayerPrefs.SetString("GameData", jsonData);
-        PlayerPrefs.Save(); // Make sure the data is written immediately
+        PlayerPrefs.Save();
         Debug.Log("Data saved: " + jsonData);
     }
 
@@ -109,7 +121,7 @@ public class GameSaving : MonoBehaviour
         }
         else
         {
-            gameData = new GameData(0, false, true);
+            gameData = new GameData(0, false, true, 0);
             Debug.Log("No saved data found. Using defaults.");
         }
 
@@ -128,7 +140,7 @@ public class GameSaving : MonoBehaviour
 
     public void resetData()
     {
-        gameData = new GameData(0, false, true);
+        gameData = new GameData(0, false, true, 0);
         SaveData();
     }
 }

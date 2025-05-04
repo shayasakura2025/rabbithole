@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class PlayerEndless : MonoBehaviour
 {
     private Vector3 mousePos;
     public Camera mainCamera;
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float score = 0;
     public TMP_Text scoreText;
-    public int timer = 5;
+    public int timer = 120;
     public TMP_Text timerText;
     private double leftBound = -40.4;
     private double rightBound = 40.4;
@@ -168,28 +168,13 @@ public class Player : MonoBehaviour
         }
         saving.setScore((int)(score));
         saving.SaveData();
-        if (getGameMode() == 0)
-        {
-            SceneManager.LoadScene("EndScene");
-        }
-        else if (getGameMode() == 1)
-        {
-            SceneManager.LoadScene("EndSceneEndless");
-        }
-        else
-        {
-            Debug.Log("No game mode detected");
-        }
+        SceneManager.LoadScene("EndSceneEndless");
+        
     }
 
     public void incrementTimer()
     {
         timer++;
-    }
-
-    public int getGameMode()
-    {
-        return saving.getMode();
     }
 
     public void zoomCamera()
