@@ -10,7 +10,6 @@ public class EatingScript : MonoBehaviour
     public int destroyTreshold;
     public int currentBuns;
     public Player player;
-    public PlayerEndless playerEndless;
     public Flock[] flock;
     public ParticleManager particleManager;
     public SoundManager soundManager;
@@ -19,7 +18,6 @@ public class EatingScript : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        playerEndless = FindObjectOfType<PlayerEndless>();
         flock = FindObjectsOfType<Flock>();
         particleManager = FindObjectOfType<ParticleManager>();
         soundManager = FindObjectOfType<SoundManager>();
@@ -51,7 +49,8 @@ public class EatingScript : MonoBehaviour
                 player.addScore(destroyTreshold);
                 if (player.getGameMode() == 1)
                 {
-                    player.incrementTimer();
+                    player.incrementTimer(destroyTreshold);
+                    player.updateTimer();
                 }
                     
                 

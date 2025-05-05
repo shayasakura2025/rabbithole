@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
         moveCamera();
         totalFlock = flock.bunCount + flockAnimated.bunCount;
         zoomCamera();
+        changeTextColor();
+
 
         if (Input.GetKey(KeyCode.E))
         {
@@ -164,8 +166,13 @@ public class Player : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             timer--;
-            timerText.text = ("Timer: " + timer);
+            updateTimer();
         }
+        endGame();
+    }
+
+    public void endGame()
+    {
         saving.setScore((int)(score));
         saving.SaveData();
         if (getGameMode() == 0)
@@ -182,9 +189,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void incrementTimer()
+    public void incrementTimer(int time)
     {
-        timer++;
+        timer += time;
+    }
+
+    public void updateTimer()
+    {
+        timerText.text = ("Timer: " + timer);
     }
 
     public int getGameMode()
@@ -197,11 +209,31 @@ public class Player : MonoBehaviour
         Debug.Log("total flock: " + totalFlock);
         if (mainCamera.orthographicSize <= 4.5)
         mainCamera.orthographicSize = totalFlock * 0.03f + 3f;
-
     }
 
     public void playJumpSound()
     {
         soundManager.playJumpSound();
+    }
+
+    public void changeTextColor()
+    {
+        Debug.Log("Attempting to change color");
+        if (saving.getMode() == 0)
+        {
+            scoreText.color = new Color(0, 0, 0, 1);
+            timerText.color = new Color(0, 0, 0, 1);
+            Debug.Log("Changing text color to black");
+        }
+        else if (saving.getMode() == 1)
+        {
+            scoreText.color = Color.red;
+            timerText.color = Color.red;
+            Debug.Log("Changing text color to pink");
+        }
+        else
+        {
+            Debug.Log("No mode found, no color change");
+        }
     }
 }

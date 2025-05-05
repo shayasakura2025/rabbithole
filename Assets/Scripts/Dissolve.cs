@@ -42,7 +42,7 @@ public class Dissolve : MonoBehaviour
 
     public IEnumerator EatItem (bool useDissolve)
     {
-        Debug.Log("In Eat");
+        //Debug.Log("In Eat");
         float elapsedTime = 0f;
         while (elapsedTime < dissolveTime)
         {
@@ -66,7 +66,7 @@ public class Dissolve : MonoBehaviour
 
     public IEnumerator unEat (bool useDissolve)
     {
-        Debug.Log("Not Eat");
+        //Debug.Log("Not Eat");
         float elapsedTime = 0f;
         while (elapsedTime < dissolveTime)
         {
