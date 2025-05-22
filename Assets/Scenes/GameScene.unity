@@ -15729,6 +15729,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 175559822}
     - target: {fileID: 3147360122990776852, guid: b6207196439aa23449deab5c248fc452, type: 3}
+      propertyPath: maxFov
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147360122990776852, guid: b6207196439aa23449deab5c248fc452, type: 3}
       propertyPath: saving
       value: 
       objectReference: {fileID: 815742174}
@@ -15740,6 +15744,10 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 440081879}
+    - target: {fileID: 3147360122990776852, guid: b6207196439aa23449deab5c248fc452, type: 3}
+      propertyPath: cameraZoom
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3147360122990776852, guid: b6207196439aa23449deab5c248fc452, type: 3}
       propertyPath: mainCamera
       value: 

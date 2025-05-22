@@ -20,9 +20,9 @@ public class Player : MonoBehaviour
     private double upperBound = 22.75;
     private double lowerBound = -22.75;
     public GameSaving saving;
-    public float cameraZoom;
-    public float minFov;
-    public float maxFov;
+    private float cameraZoom = 0.05f;
+    private float minFov = 4.5f;
+    private float maxFov = 100f;
     [SerializeField] private Flock flock;
     [SerializeField] private Flock flockAnimated;
     private int totalFlock;
@@ -207,8 +207,12 @@ public class Player : MonoBehaviour
     public void zoomCamera()
     {
         Debug.Log("total flock: " + totalFlock);
-        if (mainCamera.orthographicSize <= 4.5)
-        mainCamera.orthographicSize = totalFlock * 0.03f + 3f;
+        if (mainCamera.orthographicSize <= maxFov)
+        {
+            mainCamera.orthographicSize = totalFlock * cameraZoom + minFov;
+            Debug.Log("camera size:" + mainCamera.orthographicSize);
+        }
+
     }
 
     public void playJumpSound()
