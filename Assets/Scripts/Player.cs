@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         if (transform.position != mousePos)
         {
 
-            Vector3 newPos = Vector3.SmoothDamp(transform.position, mousePos, ref velocity, 0.075f, 20);
+            Vector3 newPos = Vector3.SmoothDamp(transform.position, mousePos, ref velocity, 0.075f, 15);
             transform.position = newPos;
             flipSprite();
         }

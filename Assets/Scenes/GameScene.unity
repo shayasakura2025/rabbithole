@@ -4187,9 +4187,9 @@ MonoBehaviour:
   agentPrefab: {fileID: 4485584010467282774, guid: 7f9065e9f9e65264c8659ea4ef842b2a, type: 3}
   behavior: {fileID: 11400000, guid: 0a7b9b61ca468d24cb76ab94940422fc, type: 2}
   startingCount: 0
-  driveFactor: 10
-  maxSpeed: 5
-  neighborRadius: 1.5
+  driveFactor: 34.7
+  maxSpeed: 7
+  neighborRadius: 1.2
   avoidanceRadiusMultiplier: 0.5
   playerRef: {fileID: 527387027}
   bunCount: 1
@@ -15736,6 +15736,10 @@ PrefabInstance:
       propertyPath: saving
       value: 
       objectReference: {fileID: 815742174}
+    - target: {fileID: 3147360122990776852, guid: b6207196439aa23449deab5c248fc452, type: 3}
+      propertyPath: hordeSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3147360122990776852, guid: b6207196439aa23449deab5c248fc452, type: 3}
       propertyPath: scoreText
       value: 
